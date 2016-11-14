@@ -11,6 +11,7 @@ import PostgresStORM
 
 class Component: PostgresStORM {
 	var id			= 0
+	var pageid		= 0
 	var spot		= ""					// the spot it slots into
 	var config		= [String: Any]()		// component level config
 	var content		= ""
@@ -20,16 +21,12 @@ class Component: PostgresStORM {
 		return "component"
 	}
 
-	// Need to do this because of the nature of Swift's introspection
 	override func to(_ this: StORMRow) {
 		id			= this.data["id"] as? Int ?? 0
+		pageid		= this.data["pageid"] as? Int ?? 0
 		spot		= this.data["spot"] as! String
 		if let configObj = this.data["config"] {
-			do {
-				try self.config = ((configObj as? String ?? "").jsonDecode() as? [String:Any])!
-			} catch {
-				print("Error decoding component config (\(id)): \(error)")
-			}
+			self.config = (configObj as? [String:Any])!
 		}
 		content		= this.data["content"] as! String
 	}

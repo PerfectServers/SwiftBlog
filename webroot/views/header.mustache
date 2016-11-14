@@ -1,28 +1,80 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-  <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="/styles/jumbotron-narrow.css" rel="stylesheet">
-    <title>{{title}}</title>
-  </head>
-  <body>
-    <div class="container">
-    <div class="header clearfix">
-      <nav>
-        <ul class="nav nav-pills pull-right">
-          {{^authenticated}}
-          <li role="presentation"><a href="/login">Log In</a></li>
-          {{/authenticated}}
-          {{#authenticated}}
-          <li role="presentation"><a href="javascript:;" onclick="var f=document.createElement('form');f.method='POST';f.action='/logout';f.submit();">Logout</a></li>
-          {{/authenticated}}
-        </ul>
-      </nav>
-      <h3 class="text-muted"><a href="/">Perfect Turnstile Authentication</a></h3>
-    </div>
-    {{#flash}}
-    <div class="alert alert-danger" role="alert">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      <span class="sr-only">Error:</span>
-      {{flash}}
-    </div>
-    {{/flash}}
+	<head>
+		<title>{{title}}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="/">{{title}}</a></h1>
+						<nav class="links">
+							<ul>
+							{{#menu}}
+								<li><a href="{{link}}">{{name}}</a></li>
+							{{/menu}}
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+							<!--
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+							-->
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+					{{^authenticated}}
+						<!-- Actions -->
+							<section>
+								<ul class="actions vertical">
+									<li><a href="/admin/login" class="button big fit">Log In</a></li>
+								</ul>
+							</section>
+					{{/authenticated}}
+					{{#authenticated}}
+							<section>
+								<ul class="links">
+									<li>
+										<a href="/admin/site">
+											<h3>Site Admin</h3>
+										</a>
+									</li>
+									<li>
+										<a href="/admin/pages">
+											<h3>Pages</h3>
+										</a>
+									</li>
+									<li>
+										<a href="/admin/logout">
+											<h3>Logout</h3>
+										</a>
+									</li>
+								</ul>
+							</section>
+					{{/authenticated}}
+					</section>

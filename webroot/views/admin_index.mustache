@@ -1,0 +1,27 @@
+{{>header}}
+
+{{^authenticated}}
+<h1>Access Denied</h1>
+{{/authenticated}}
+
+
+
+
+
+{{#authenticated}}
+
+<div class="header">
+<div style="padding: 10px 20px">
+<a href="/admin/site">site</a> |
+<a href="/admin/pages">pages</a> |
+<div style="float: right; padding-right: 0; margin-right: 0;"><a href="/logout">logout</a></div>
+</div>
+</div>
+
+
+<h1>Hi!</h1>
+<p>Hello</p>
+{{/authenticated}}
+
+
+{{>footer}}

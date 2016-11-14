@@ -1,0 +1,20 @@
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="/{{url}}">{{name}}</a></h2>
+										<p>{{subhead}}</p>
+									</div>
+									<div class="meta">
+										<time class="published">{{datepublished}}</time>
+									</div>
+								</header>
+								<img src="images/pic01.jpg" alt="" />
+								{{#components}}
+									{{#body?}}{{{content}}}{{/body?}}
+								{{/components}}
+								<footer>
+									<ul class="stats">
+										{{#tags}}<li>{{tag}}</li>{{/tags}}
+									</ul>
+								</footer>
+							</article>
