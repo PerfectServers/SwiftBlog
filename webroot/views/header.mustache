@@ -6,6 +6,17 @@
 -->
 <html>
 	<head>
+			{{#components}}{{#gtmcode?}}
+	<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','{{{content}}}');</script>
+<!-- End Google Tag Manager -->
+			{{/gtmcode?}}{{/components}}
+
+
 		<title>{{title}}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,8 +24,18 @@
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	</head>
 	<body>
+			{{#components}}{{#gtmcode?}}
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{{content}}}"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+			{{/gtmcode?}}{{/components}}
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -65,13 +86,28 @@
 										</a>
 									</li>
 									<li>
+										<a href="/admin/social">
+											<h3>Social & Analytics</h3>
+										</a>
+									</li>
+									<li>
 										<a href="/admin/pages">
 											<h3>Pages</h3>
 										</a>
 									</li>
 									<li>
+										<a href="/admin/users">
+											<h3>Users</h3>
+										</a>
+									</li>
+									<li>
+										<a href="https://console.aws.amazon.com/s3/home?region=us-east-1&bucket=xserve-media&prefix=" target="_blank">
+											<h3>S3 Bucket</h3>
+										</a>
+									</li>
+									<li>
 										<a href="/admin/logout">
-											<h3>Logout</h3>
+											<h3>&gt;&gt; Logout</h3>
 										</a>
 									</li>
 								</ul>

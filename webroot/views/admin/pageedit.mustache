@@ -1,0 +1,78 @@
+{{>../header}}
+		<link rel="stylesheet" href="/styles/admin.css" />
+		<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+		<script>tinymce.init({ selector:'.mceeditable' });</script>
+
+				<!-- Main -->
+					<div id="main">
+
+<h2>{{pagename}}</h2>
+
+<form method="post" action="?">
+
+	<div class="admin-mb">
+		Page Name:<br>
+		<input type="text" name="pagename" value="{{name}}">
+	</div>
+	<div class="admin-mb">
+		Page URL:<br>
+		<input type="text" name="url" value="{{url}}">
+	</div>
+	<div class="admin-mb">
+		Type:<br>
+		<select name="type">
+			<option value="" {{isUnspecified}}>Unspecified</option>
+			<option value="article" {{isArticle}}>Article</option>
+			<option value="general" {{isGeneral}}>General</option>
+			
+		</select>
+	</div>
+	<div class="admin-mb">
+		Subhead:<br>
+		<input type="text" name="subhead" value="{{#config}}{{subhead}}{{/config}}">
+	</div>
+	<div class="admin-mb">
+		Date Published:<br>
+		<input type="text" name="datepublished" value="{{#config}}{{datepublished}}{{/config}}">
+	</div>
+
+	<div class="admin-mb">
+		Hero Image:<br>
+		<input type="text" name="heroimage" value="{{#config}}{{heroimage}}{{/config}}">
+	</div>
+
+	<div class="admin-mb">
+		Hero Image Alt Text:<br>
+		<input type="text" name="heroimagealt" value="{{#config}}{{heroimagealt}}{{/config}}">
+	</div>
+
+	<div class="admin-mb">
+		Tags:<br>
+		<input type="text" name="tags" value="{{#config}}{{#tags}}{{{tag}}}, {{/tags}}{{/config}}">
+	</div>
+	<div class="admin-mb">
+		Page Script:<br>
+		<input type="text" name="script" value="{{#config}}{{script}}{{/config}}">
+	</div>
+
+
+	<div class="admin-mb">
+		Intro:<br>
+		<textarea name="intro" class="mceeditable">{{#config}}{{intro}}{{/config}}</textarea>
+	</div>
+
+	<div class="admin-mb">
+		Meta Description:<br>
+		<textarea name="metadescription">{{#config}}{{metadescription}}{{/config}}</textarea>
+	</div>
+
+
+	<div class="admin-mb">
+		<input type="submit" name="Save">
+	</div>
+</form>
+
+					</div>
+{{>../sidebar}}
+{{>../footer}}
+

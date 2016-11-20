@@ -9,6 +9,7 @@
 import StORM
 import PostgresStORM
 import PerfectLib
+import PerfectLogger
 
 class Site: PostgresStORM {
 	var id			= 0
@@ -45,7 +46,11 @@ class Site: PostgresStORM {
 
 	func getSiteInfo() {
 		let cursor = StORMCursor(limit: 1, offset: 0)
-		try? select(whereclause: "id > $1", params: [0], orderby: ["id DESC"], cursor: cursor)
-		print(url)
+		do {
+			try select(whereclause: "id > $1", params: [0], orderby: ["id DESC"], cursor: cursor)
+		} catch {
+			LogFile.critical("Site not loaded: \(error)")
+		}
+		LogFile.info("Site URL loaded: \(url)")
 	}
 }

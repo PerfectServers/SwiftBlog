@@ -1,0 +1,59 @@
+{{>../header}}
+
+		<link rel="stylesheet" href="/styles/admin.css" />
+
+				<!-- Main -->
+					<div id="main">
+
+						<h2>{{pagename}}
+							<input type="button" value="New Page" style="float: right; margin-top: -15px" onClick="document.location.href='/admin/pages/new'">
+						</h2>
+								<table id="pageDisplay">
+									<tr>
+										<td>
+											Page&nbsp;Name
+										</td>
+										<td>
+											URL
+										</td>
+										<td>
+											Type
+										</td>
+										<td>
+											Date&nbsp;Published
+										</td>
+										<td colspan="3">
+											State
+										</td>
+									</tr>
+<tbody id="sortable">
+						{{#pages}}
+									<tr id="sort_{{id}}">
+										<td style="background-color: #FFF"><a href="{{url}}">{{name}}</a></td>
+										<td style="background-color: #FFF"><a href="{{url}}">{{url}}</a></td>
+										<td style="background-color: #FFF">{{type}}</td>
+										<td style="background-color: #FFF">{{datepublished}}</td>
+										<td style="background-color: #FFF"><a href="/admin/pages/{{id}}/toggle">{{state}}</a></td>
+										<td style="background-color: #FFF"><a href="/admin/pages/{{id}}/edit">Config</a></td>
+										<td style="background-color: #FFF"><a href="/admin/pages/{{id}}/delete">Delete</a></td>
+									</tr>
+						{{/pages}}
+</tbody>
+								</table>
+
+
+					 </div>
+<script>
+$( function() {
+	$( "#sortable" ).sortable();
+	//$( "#sortable" ).disableSelection();
+	var sorted = $( "#sortable" ).sortable( "serialize", { key: "sort" } );
+} );
+
+
+</script>
+
+
+{{>../sidebar}}
+{{>../footer}}
+

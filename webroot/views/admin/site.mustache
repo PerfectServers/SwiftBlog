@@ -1,0 +1,65 @@
+{{>../header}}
+		<link rel="stylesheet" href="/styles/admin.css" />
+		<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+		<script>tinymce.init({ selector:'textarea' });</script>
+
+				<!-- Main -->
+					<div id="main">
+
+<h2>Site Admin</h2>
+
+<form method="post" action="?">
+
+	<div class="admin-mb">
+		Site URL:<br>
+		<input type="text" name="url" value="{{url}}">
+	</div>
+	<div class="admin-mb">
+		Site Title:<br>
+		<input type="text" name="title" value="{{title}}">
+	</div>
+	<div class="admin-mb">
+		Subhead:<br>
+		<input type="text" name="subhead" value="{{#components}}{{#subhead?}}{{{content}}}{{/subhead?}}{{/components}}">
+	</div>
+
+	<div class="admin-mb">
+		About:<br>
+		<textarea name="about">{{#components}}{{#about?}}{{{content}}}{{/about?}}{{/components}}</textarea>
+	</div>
+
+<h2>Site Menu</h2>
+
+
+	<div class="admin-mb">
+		<table>
+			<tr>
+				<td>
+					Menu Name
+				</td>
+				<td>
+					Link
+				</td>
+			</tr>
+{{#menudata}}
+			<tr>
+				<td style="background-color: #FFF">
+					<input type="text" name="menuname" value="{{name}}">
+				</td>
+				<td style="background-color: #FFF">
+					<input type="text" name="menulink" value="{{link}}">
+				</td>
+			</tr>
+{{/menudata}}
+		</table>
+	</div>
+	
+	<div class="admin-mb">
+		<input type="submit" name="Save">
+	</div>
+</form>
+
+					</div>
+{{>../sidebar}}
+{{>../footer}}
+

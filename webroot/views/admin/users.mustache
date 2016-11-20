@@ -1,0 +1,36 @@
+{{>../header}}
+
+		<link rel="stylesheet" href="/styles/admin.css" />
+
+				<!-- Main -->
+					<div id="main">
+
+						<h2>{{pagename}}</h2>
+								<table>
+									<tr>
+										<td>
+											User
+										</td>
+										<td>
+											Email
+										</td>
+										<td>
+											State
+										</td>
+									</tr>
+						{{#users}}
+									<tr>
+										<td style="background-color: #FFF">{{name}}</td>
+										<td style="background-color: #FFF">{{email}}</td>
+										<td style="background-color: #FFF">{{state}}</td>
+									</tr>
+						{{/users}}
+								</table>
+
+
+					 </div>
+
+
+{{>../sidebar}}
+{{>../footer}}
+

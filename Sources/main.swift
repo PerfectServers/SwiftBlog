@@ -21,29 +21,43 @@
 import PerfectLib
 import PerfectHTTP
 import PerfectHTTPServer
+import PerfectLogger
 
 import StORM
 import PostgresStORM
 import PerfectTurnstilePostgreSQL
+import PerfectRequestLogger
 
-StORMdebug = true
+//StORMdebug = true
 
 let pturnstile = TurnstilePerfectRealm()
 
 let webRoot = "./webroot"
+
+LogFile.location = "./log.txt"
+
+LogFile.info("Starting SwiftBlog")
+
 #if os(Linux)
 	let fileRoot = "/perfect-deployed/swiftblog/"
 	var httpPort = 80
 #else
 	let fileRoot = ""
 	var httpPort = 8181
+	RequestLogFile.location = "./webLog.log"
 #endif
+
+LogFile.info("httpPort: \(httpPort)")
+
 
 let apiRoute = "/api/v1/"
 
 // set up creds
 makeCreds()
 setupSystem()
+
+LogFile.info("connect?.credentials.host now: \(connect?.credentials.host)")
+
 
 // Create HTTP server.
 let server = HTTPServer()
@@ -56,6 +70,14 @@ let authWebRoutes = makeWebAuthRoutes()
 server.addRoutes(authWebRoutes)
 //server.addRoutes(authJSONRoutes)
 server.addRoutes(makeRoutes())
+server.addRoutes(makeAdminRoutes())
+
+
+let httplogger = RequestLogger()
+
+server.setRequestFilters([(httplogger, .high)])
+server.setResponseFilters([(httplogger, .low)])
+
 
 
 // add routes to be checked for auth
@@ -82,6 +104,7 @@ server.documentRoot = webRoot
 
 
 do {
+	LogFile.info("HTTP Server starting")
 	// Launch the HTTP server.
 	try server.start()
 } catch PerfectError.networkError(let err, let msg) {

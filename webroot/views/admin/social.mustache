@@ -1,0 +1,62 @@
+{{>../header}}
+		<link rel="stylesheet" href="/styles/admin.css" />
+		<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+		<script>tinymce.init({ selector:'textarea' });</script>
+
+				<!-- Main -->
+					<div id="main">
+
+<h2>Site Social Media Links & Analytics</h2>
+
+<form method="post" action="?">
+
+	<div class="admin-mb">
+		Twitter:<br>
+		<input type="text" name="twitter" value="{{#components}}{{#twitter?}}{{{content}}}{{/twitter?}}{{/components}}">
+	</div>
+	
+	<div class="admin-mb">
+		Facebook:<br>
+		<input type="text" name="facebook" value="{{#components}}{{#facebook?}}{{{content}}}{{/facebook?}}{{/components}}">
+	</div>
+	
+	<div class="admin-mb">
+		Instagram:<br>
+		<input type="text" name="instagram" value="{{#components}}{{#instagram?}}{{{content}}}{{/instagram?}}{{/components}}">
+	</div>
+
+	<div class="admin-mb">
+		Email:<br>
+		<input type="text" name="email" value="{{#components}}{{#email?}}{{{content}}}{{/email?}}{{/components}}">
+	</div>
+
+<hr>
+
+	<div class="admin-mb">
+		Disqus:<br>
+		<input type="text" name="disqus" value="{{#components}}{{#disqus?}}{{{content}}}{{/disqus?}}{{/components}}">
+	</div>
+
+
+<hr>
+
+	<div class="admin-mb">
+		Google Analytics Code:<br>
+		<input type="text" name="googleanalytics" value="{{#components}}{{#googleanalytics?}}{{{content}}}{{/googleanalytics?}}{{/components}}">
+	</div>
+
+	<div class="admin-mb">
+		Google Tag Manager Code:<br>
+		<input type="text" name="gtmcode" value="{{#components}}{{#gtmcode?}}{{{content}}}{{/gtmcode?}}{{/components}}">
+	</div>
+
+	
+	<div class="admin-mb">
+		<input type="submit" name="Save">
+	</div>
+</form>
+
+					</div>
+{{>../sidebar}}
+{{>../footer}}
+

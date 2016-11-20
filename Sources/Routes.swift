@@ -15,11 +15,8 @@ import PerfectTurnstilePostgreSQL
 public func makeRoutes() -> Routes {
 	var routes = Routes()
 
-	routes.add(method: .get, uri: "/", handler: makeHome)
-	routes.add(method: .get, uri: "/admin/login", handler: makeLogin)
-	routes.add(method: .get, uri: "/admin/logout", handler: AuthHandlersWeb.logoutHandler)
-	routes.add(method: .get, uri: "/{pageid}", handler: makePage)
-//	routes.add(method: .get, uri: "/app/news/{id}", handler: getWebNewsDetail)
+	routes.add(method: .get, uri: "/", handler: PageHandlers.makeHome)
+	routes.add(method: .get, uri: "/{pageid}", handler: PageHandlers.makePage)
 
 	return routes
 }

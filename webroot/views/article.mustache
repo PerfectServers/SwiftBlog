@@ -1,20 +1,92 @@
-							<article class="post">
-								<header>
-									<div class="title">
-										<h2><a href="/{{url}}">{{name}}</a></h2>
-										<p>{{subhead}}</p>
-									</div>
-									<div class="meta">
-										<time class="published">{{datepublished}}</time>
-									</div>
-								</header>
-								<img src="images/pic01.jpg" alt="" />
-								{{#components}}
-									{{#body?}}{{{content}}}{{/body?}}
-								{{/components}}
-								<footer>
-									<ul class="stats">
-										{{#tags}}<li>{{tag}}</li>{{/tags}}
-									</ul>
-								</footer>
-							</article>
+<article class="post">
+	<header>
+		<div class="title">
+			<h2><a href="/{{url}}">{{name}}</a></h2>
+			<p>{{subhead}}</p>
+		</div>
+		<div class="meta">
+			<time class="published">{{datepublished}}</time>
+		</div>
+	</header>
+	{{{script}}}
+	{{#heroimage?}}<img src="{{{image}}}" alt="{{{alt}}}" width="100%" />{{/heroimage?}}
+	{{#components}}
+		<div{{#authenticated}} id="editor1" contenteditable="true"{{/authenticated}}>
+			{{#body?}}{{{content}}}{{/body?}}
+		</div>
+	{{/components}}
+	<footer>
+		<ul class="stats">
+			{{#tags}}<li>{{tag}}</li>{{/tags}}
+		</ul>
+	</footer>
+	
+	{{#disqus?}}	<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+	this.page.url = 'http://{{siteurl}}/{{link}}';
+	this.page.identifier = '{{link}}';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//{{{content}}}.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	{{/disqus?}}
+	
+</article>
+
+
+	{{#disqus?}}<script id="dsq-count-scr" src="//{{{content}}}.disqus.com/count.js" async></script>{{/disqus?}}
+
+
+{{#authenticated}}
+
+		<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+		<script>tinymce.init({
+		selector:'div#editor1',
+		inline: true,
+		  plugins: [
+		    'advlist autolink lists link image charmap print preview anchor',
+		    'searchreplace visualblocks code fullscreen',
+		    'insertdatetime media table contextmenu paste',
+			'wordcount'
+		  ],
+
+		  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+
+		    init_instance_callback: function (editor) {
+			    editor.on('blur', function (e) {
+							var dataObj 	= {};
+							dataObj.todo 	= "save";
+							dataObj.content = editor.getContent();
+							dataObj.id 		= {{id}};
+							
+							$.ajax({
+								url:		"/admin/pages/{{id}}/save",
+					            beforeSend: function (request)
+					            {
+					                request.setRequestHeader("Authorization", "Bearer {{token}}");
+					            },
+								data:		dataObj,
+								async:		true,
+								type:		'post',
+								cache:		false,
+								dataType:	'json',
+								success:	function(xhr) {
+									console.log('Content saved');
+								}
+
+							});
+
+			    });
+			  }
+
+		});
+		</script>
+{{/authenticated}}
