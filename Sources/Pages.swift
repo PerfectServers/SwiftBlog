@@ -84,6 +84,7 @@ class Page: PostgresStORM {
 		var article = [String: Any]()
 
 		var whereclause = [String]()
+		var orderby = [String]()
 		var params = [String]()
 		let cursor = StORMCursor(limit: 1, offset: 0)
 
@@ -96,9 +97,12 @@ class Page: PostgresStORM {
 		if link.isEmpty == false {
 			whereclause.append("url = $1")
 			params.append(link)
+		} else {
+			orderby.append("displayorder")
 		}
+		orderby.append("id DESC")
 
-		try? select(whereclause: whereclause.joined(separator: " AND "), params: params, orderby: ["id DESC"], cursor: cursor)
+		try? select(whereclause: whereclause.joined(separator: " AND "), params: params, orderby: orderby, cursor: cursor)
 
 		if results.cursorData.totalRecords == 0 {
 			return article
