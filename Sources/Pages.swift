@@ -10,11 +10,12 @@ import StORM
 import PostgresStORM
 
 class Page: PostgresStORM {
-	var id			= 0
-	var name		= ""
-	var url			= ""					// sliugified name by default
-	var config		= [String: Any]()		// page level config
-	var state		= false					// visible, not visible
+	var id				= 0
+	var name			= ""
+	var url				= ""					// slugified name by default
+	var config			= [String: Any]()		// page level config
+	var state			= false					// visible, not visible
+	var displayorder	= 0
 
 	// Set the table name
 	override open func table() -> String {
@@ -23,16 +24,12 @@ class Page: PostgresStORM {
 
 	// Need to do this because of the nature of Swift's introspection
 	override func to(_ this: StORMRow) {
-		id			= this.data["id"] as? Int ?? 0
-		name		= this.data["name"] as! String
-		url			= this.data["url"] as! String
+		id				= this.data["id"] as? Int ?? 0
+		name			= this.data["name"] as! String
+		url				= this.data["url"] as! String
+		displayorder	= this.data["displayorder"] as? Int ?? 0
 		if let configObj = this.data["config"] {
 			self.config = (configObj as? [String:Any])!
-//			do {
-//				try self.config = ((configObj as? String ?? "").jsonDecode() as? [String:Any])!
-//			} catch {
-//				print("Error decoding component config (\(id)): \(error)")
-//			}
 		}
 		if let stateObj = this.data["state"] {
 			if stateObj as! Bool == false {
@@ -55,7 +52,7 @@ class Page: PostgresStORM {
 
 	func getArticles() -> [[String: Any]] {
 		//config @> '{"type":"article"}'::jsonb
-		try? select(whereclause: "config @> '{\"type\":\"article\"}'::jsonb AND state = $1", params: ["true"], orderby: ["id"])
+		try? select(whereclause: "config @> '{\"type\":\"article\"}'::jsonb AND state = $1", params: ["true"], orderby: ["displayorder","id"])
 		var articleArray = [[String: Any]]()
 
 		for row in rows() {
@@ -75,7 +72,6 @@ class Page: PostgresStORM {
 				r["tags"] = (tags as? [Any])!
 			}
 
-//			r["config"] = row.config
 			articleArray.append(r)
 		}
 		
@@ -140,10 +136,8 @@ class Page: PostgresStORM {
 				thisRow["content"] = cRow.content
 				cRowData.append(["\(cRow.spot)?": thisRow])
 			}
-//			print(cRowData)
 			article["components"] = cRowData
 		}
-		print(article)
 		return article
 		
 		
@@ -204,11 +198,10 @@ class Page: PostgresStORM {
 					r["body?"] = ["content":""]
 					cRowData.append(r)
 				}
-//				print("getPageData: \(cRowData)")
 				article["components"] = cRowData
 			}
 		}
-		print(article)
+
 		return article
 		
 		
@@ -217,7 +210,7 @@ class Page: PostgresStORM {
 
 	func pageList() -> [[String: Any]] {
 		//config @> '{"type":"article"}'::jsonb
-		try? select(whereclause: "", params: [], orderby: ["id"])
+		try? select(whereclause: "", params: [], orderby: ["displayorder","id DESC"])
 		var pageArray = [[String: Any]]()
 
 		for row in rows() {

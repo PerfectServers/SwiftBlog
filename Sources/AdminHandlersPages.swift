@@ -60,6 +60,28 @@ extension BlogAdmin {
 	}
 
 
+	static func pagesAdminSaveOrder(request: HTTPRequest, _ response: HTTPResponse) {
+
+		let orders = request.params(named: "sort")
+		//orders.reverse()
+
+		let aPage = Page(connect!)
+		var orderN = 1
+		for p in orders {
+			_ = try? aPage.sql("UPDATE page SET displayorder = $1 WHERE id = $2", params: [String(orderN),p])
+			orderN += 1
+		}
+
+		// return JSON data to client
+		do {
+			try response.setBody(json: ["order":"complete"])
+		} catch {
+			print(error)
+		}
+		response.completed()
+
+	}
+
 
 	static func pagesAdmin(request: HTTPRequest, _ response: HTTPResponse) {
 
@@ -69,6 +91,7 @@ extension BlogAdmin {
 		let context: [String : Any] = [
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
 			"authenticated": request.user.authenticated,
+			"token": request.user.authDetails?.sessionID ?? "",
 			"title": site.config["title"] as! String,
 			"menu": site.config["menu"] as! [Any],
 			"pagename": "Pages Admin",

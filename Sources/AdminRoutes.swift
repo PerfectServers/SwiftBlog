@@ -21,6 +21,7 @@ public func makeAdminRoutes() -> Routes {
 
 	// Pages
 	routes.add(method: .get, uri: "/admin/pages", handler: BlogAdmin.pagesAdmin)
+	routes.add(method: .post, uri: "/admin/pages/saveorder", handler: BlogAdmin.pagesAdminSaveOrder)
 
 	routes.add(method: .get, uri: "/admin/pages/new", handler: BlogAdmin.pagesAdminCreate)
 	routes.add(method: .post, uri: "/admin/pages/new", handler: BlogAdmin.pagesAdminCreate)

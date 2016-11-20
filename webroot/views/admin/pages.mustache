@@ -45,10 +45,34 @@
 					 </div>
 <script>
 $( function() {
-	$( "#sortable" ).sortable();
-	//$( "#sortable" ).disableSelection();
-	var sorted = $( "#sortable" ).sortable( "serialize", { key: "sort" } );
-} );
+//		serialize, { key: "sort"},
+
+$("#sortable").sortable({
+	update: function(event, ui) {
+
+		var data = $( this ).sortable( "serialize", { key: "sort" } );
+		$.ajax({
+			url:		"/admin/pages/saveorder",
+			beforeSend: function (request) {
+				request.setRequestHeader("Authorization", "Bearer {{token}}");
+			},
+			data:		data,
+			async:		true,
+			type:		'post',
+			cache:		false,
+			dataType:	'json',
+			success:	function(xhr) {
+				console.log('Content order saved');
+			}
+
+		});
+
+	}
+});
+
+
+
+});
 
 
 </script>
