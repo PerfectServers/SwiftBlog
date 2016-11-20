@@ -179,22 +179,16 @@ extension BlogAdmin {
 	
 	static func pagesAdminDelete(request: HTTPRequest, _ response: HTTPResponse) {
 
-		let articles = Page(connect!)
-		let pages = Page(connect!)
+		let page = Page(connect!)
+		let id = request.urlVariables["id"] ?? ""
+		do {
+			try page.delete(id)
+		} catch {
+			print("Deleting page id \(id) error - cannot delete page: \(error)")
+		}
 
-		let context: [String : Any] = [
-			"accountID": request.user.authDetails?.account.uniqueID ?? "",
-			"authenticated": request.user.authenticated,
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
-			"pagename": "Pages Admin",
-			"components": BlogAdmin.componentList(0),
-			"articles": articles.getArticles(),
-			"pages": pages.pageList()
-		]
+		BlogAdmin.returnToList(request: request, response)
 
-		response.render(template: "admin/pages", context: context)
-		
 	}
 	
 	static func pagesAdminToggle(request: HTTPRequest, _ response: HTTPResponse) {
