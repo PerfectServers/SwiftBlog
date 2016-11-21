@@ -29,19 +29,10 @@ extension BlogAdmin {
 		page.url = request.param(name: "url", defaultValue: "Not Set")!
 		page.name = request.param(name: "pagename", defaultValue: "Not Set")!
 
-		//{"tags": [{"tag": "stuff"}, {"tag": "donkeys"}], "type": "article", "intro": "<p>Lorem ipsum etc</p>", "subhead": "Hello World", "datepublished": "November 1st, 2016"}
-
 		for opt in ["type", "intro", "subhead", "datepublished", "metadescription", "script", "heroimage", "heroimagealt"] {
 			page.config[opt] = request.param(name: opt, defaultValue: "")!
 		}
 
-//		page.config["type"] = request.param(name: "type", defaultValue: "")!
-//		page.config["intro"] = request.param(name: "intro", defaultValue: "")!
-//		page.config["subhead"] = request.param(name: "subhead", defaultValue: "")!
-//		page.config["datepublished"] = request.param(name: "datepublished", defaultValue: "")!
-//		page.config["metadescription"] = request.param(name: "metadescription", defaultValue: "")!
-//		page.config["script"] = request.param(name: "script", defaultValue: "")!
-//		page.config["heroimage"] = request.param(name: "heroimage", defaultValue: "")!
 
 		let tags = request.param(name: "tags", defaultValue: "")!
 		let taglist = tags.split(",")
@@ -65,7 +56,6 @@ extension BlogAdmin {
 	static func pagesAdminSaveOrder(request: HTTPRequest, _ response: HTTPResponse) {
 
 		let orders = request.params(named: "sort")
-		//orders.reverse()
 
 		let aPage = Page(connect!)
 		var orderN = 1
@@ -110,7 +100,7 @@ extension BlogAdmin {
 
 		let articles = Page(connect!)
 
-		// save component...
+		// save component.
 		if request.method == .post {
 			let page = Page(connect!)
 			BlogAdmin.savePageData(request, response, page: page)
@@ -144,7 +134,7 @@ extension BlogAdmin {
 			print("Edit page id \(id) error - cannot load page: \(error)")
 		}
 
-		// save component...
+		// save component.
 		if request.method == .post {
 			BlogAdmin.savePageData(request, response, page: page)
 		}

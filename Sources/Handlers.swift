@@ -189,7 +189,6 @@ class PageHandlers {
 		let articles = Page(connect!)
 		let articleArray = articles.getArticles()
 
-//print(page.toStub())
 
 		let context: [String : Any] = [
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",

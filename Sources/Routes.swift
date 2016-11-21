@@ -7,7 +7,6 @@
 //
 
 import PerfectHTTP
-import PerfectTurnstilePostgreSQL
 
 // This function creates the routes
 // Handlers are in Handlers.swift

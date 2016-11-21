@@ -80,7 +80,6 @@ extension BlogAdmin {
 			userArray.append(r)
 		}
 
-//		print(userArray)
 
 		let context: [String : Any] = [
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",

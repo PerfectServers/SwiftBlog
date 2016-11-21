@@ -51,7 +51,7 @@ class Page: PostgresStORM {
 	}
 
 	func getArticles() -> [[String: Any]] {
-		//config @> '{"type":"article"}'::jsonb
+
 		try? select(whereclause: "config @> '{\"type\":\"article\"}'::jsonb AND state = $1", params: ["true"], orderby: ["displayorder","id"])
 		var articleArray = [[String: Any]]()
 

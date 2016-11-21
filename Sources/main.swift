@@ -64,11 +64,9 @@ let server = HTTPServer()
 
 // Register authentication routes and handlers
 let authWebRoutes = makeWebAuthRoutes()
-//let authJSONRoutes = makeJSONAuthRoutes(apiRoute)
 
 // Add the routes to the server.
 server.addRoutes(authWebRoutes)
-//server.addRoutes(authJSONRoutes)
 server.addRoutes(makeRoutes())
 server.addRoutes(makeAdminRoutes())
 
