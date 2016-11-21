@@ -10,7 +10,7 @@
 												<h3><a href="/{{url}}">{{name}}</a></h3>
 												<time class="published">{{datepublished}}</time>
 											</header>
-											<a href="/{{url}}" class="image"><img src="/images/pic04.jpg" alt="" /></a>
+											{{#heroimage?}}<a href="/{{url}}" class="image"><img src="{{{image}}}" alt="{{{alt}}}" width="100%" /></a>{{/heroimage?}}
 										</article>
 									{{/articles}}
 

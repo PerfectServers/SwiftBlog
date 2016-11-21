@@ -5,24 +5,33 @@
 				<!-- Main -->
 					<div id="main">
 
-						<h2>{{pagename}}</h2>
-								<table>
+<h2>{{pagename}}
+<input type="button" value="New User" style="float: right; margin-top: -15px" onClick="document.location.href='/admin/users/new'">
+</h2>
+								<table id="pageDisplay">
 									<tr>
 										<td>
-											User
+											Name
+										</td>
+										<td>
+											UserName
 										</td>
 										<td>
 											Email
 										</td>
-										<td>
-											State
+										<td width="120px">
+											&nbsp;
 										</td>
 									</tr>
 						{{#users}}
 									<tr>
-										<td style="background-color: #FFF">{{name}}</td>
+										<td style="background-color: #FFF">{{firstname}} {{lastname}}</td>
+										<td style="background-color: #FFF">{{username}}</td>
 										<td style="background-color: #FFF">{{email}}</td>
-										<td style="background-color: #FFF">{{state}}</td>
+										<td style="background-color: #FFF">
+											<a href="/admin/users/{{uniqueID}}/edit" style="margin-right: 20px;">Edit</a>
+											<a href="/admin/users/{{uniqueID}}/delete">Delete</a>
+										</td>
 									</tr>
 						{{/users}}
 								</table>

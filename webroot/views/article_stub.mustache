@@ -5,18 +5,17 @@
 										<p>{{subhead}}</p>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2015-11-01">{{datepublished}}</time>
-										<a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>
+										<time class="published">{{datepublished}}</time>
 									</div>
 								</header>
-								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+								{{#heroimage?}}<div style="max-height: 300px; overflow: hidden; margin-bottom: 20px;"><a href="/{{url}}" class="image"><img src="{{{image}}}" alt="{{{alt}}}" width="100%" /></a></div>{{/heroimage?}}
 								{{{intro}}}
 								<footer>
 									<ul class="actions">
 										<li><a href="{{url}}" class="button big">Continue Reading</a></li>
 									</ul>
 									<ul class="stats">
-										{{#tags}}<li>{{tag}}</li>{{/tags}}
+										{{#tags}}<li><a href="/tag/{{tag}}">{{tag}}</a></li>{{/tags}}
 									</ul>
 								</footer>
 							</article>

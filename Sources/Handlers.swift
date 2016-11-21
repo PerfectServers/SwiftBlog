@@ -147,26 +147,64 @@ class PageHandlers {
 		response.render(template: "page", context: context)
 	}
 
+
+
+
+
+
+
+	static func makeTagPage(request: HTTPRequest, _ response: HTTPResponse) {
+
+		// set up container object for results
+		let page = Page(connect!)
+		let components = Component(connect!)
+		// set the cursor (number of results to return, and offset from start)
+		let pageCursor = StORMCursor(limit: 100, offset: 0)
+
+		var tag = request.urlVariables["tag"] ?? ""
+		tag = tag.stringByReplacing(string: "%20", withString: " ")
+
+		// main search
+		do {
+			try page.select(columns: [], whereclause: "config @> '{\"tags\": [{\"tag\": \"\(tag.latinize())\"}]}'::jsonb AND state = $1", params: ["true"], orderby: [], cursor: pageCursor)
+		} catch {
+			print(error)
+		}
+
+		// sidebar components
+		var componentArray = [[String: Any]]()
+		do {
+			// gets all generic compoennts (pageid 0)
+			try components.select(columns: [], whereclause: "pageid = $1", params: [0], orderby: [])
+
+			// process incoming array of data
+			for row in components.rows() {
+				var r = [String: Any]()
+				r["\(row.spot)?"] = ["content":row.content]
+				componentArray.append(r)
+			}
+		} catch {
+			print(error)
+		}
+		let articles = Page(connect!)
+		let articleArray = articles.getArticles()
+
+//print(page.toStub())
+
+		let context: [String : Any] = [
+			"accountID": request.user.authDetails?.account.uniqueID ?? "",
+			"token": request.user.authDetails?.sessionID ?? "",
+			"authenticated": request.user.authenticated,
+			"title": site.config["title"] as! String,
+			"menu": site.config["menu"] as! [Any],
+			"siteurl": site.url,
+			"pagename": page.name,
+			"components": componentArray,
+			"articles": articleArray,
+			"pages": page.toStub()
+		]
+		response.render(template: "tags", context: context)
+	}
+
 }
 
-//func getWebNewsDetail(request: HTTPRequest, _ response: HTTPResponse) {
-//
-//	let id = request.urlVariables["id"] ?? ""
-//
-//	// set up container object for results
-//	let news = News(connect!)
-//	do {
-//		try news.get(id)
-//	} catch {
-//		print(error)
-//	}
-//	let context: [String : Any] = [
-//		"accountID": request.user.authDetails?.account.uniqueID ?? "",
-//		"authenticated": request.user.authenticated,
-//		"headline": news.headline,
-//		"subhead": news.subhead,
-//		"body": news.body
-//	]
-//	response.render(template: "newsdetail", context: context)
-//}
-//

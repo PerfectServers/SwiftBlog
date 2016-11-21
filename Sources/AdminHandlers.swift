@@ -186,66 +186,6 @@ class BlogAdmin {
 	}
 
 
-	static func userAdmin(request: HTTPRequest, _ response: HTTPResponse) {
 
-		// save component...
-//		if request.method == .post {
-//			let thisSite = Site(connect!)
-//			thisSite.id = site.id
-//			thisSite.url = request.param(name: "url", defaultValue: "Not Set")!
-//			//{"menu": [{"link": "/one", "name": "One"}, {"link": "/two", "name": "Two"}, {"link": "/dragons", "name": "Three"}], "title": "Relatable Rachel"}
-//			thisSite.config["title"] = request.param(name: "title", defaultValue: "Not Set")!
-//			thisSite.config["menu"] = site.config["menu"]
-//			try? thisSite.save()
-//
-//			// also need to save subhead component
-//			let sub = Component(connect!)
-//			var opts = [(String,Any)]()
-//			opts.append(("spot","subhead"))
-//			opts.append(("pageid",0))
-//			try? sub.find(opts)
-//			sub.content = request.param(name: "subhead", defaultValue: "Not Set")!
-//			try? sub.save()
-//
-//			// also need to save about
-//			let about = Component(connect!)
-//			var optsAbout = [(String,Any)]()
-//			optsAbout.append(("spot","about"))
-//			optsAbout.append(("pageid",0))
-//			try? about.find(optsAbout)
-//			about.content = request.param(name: "about", defaultValue: "Not Set")!
-//			try? about.save()
-//
-//			site.getSiteInfo()
-//		}
-		// end save compoennt
-
-
-		let componentArray = BlogAdmin.componentList(0)
-
-		let articles = Page(connect!)
-		let articleArray = articles.getArticles()
-
-		let users = [[String:String]]()
-//		for ob in site.config["menu"] as! [[String:String]] {
-//			menu.append(ob)
-//		}
-//		for _ in menu.count..<10 {
-//			menu.append(["link":"","name":""])
-//		}
-
-		let context: [String : Any] = [
-			"accountID": request.user.authDetails?.account.uniqueID ?? "",
-			"authenticated": request.user.authenticated,
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
-			"users": users,
-			"pagename": "User Admin",
-			"components": componentArray,
-			"articles": articleArray
-		]
-
-		response.render(template: "admin/users", context: context)
-	}
 
 }

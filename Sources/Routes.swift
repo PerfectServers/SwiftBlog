@@ -17,6 +17,7 @@ public func makeRoutes() -> Routes {
 
 	routes.add(method: .get, uri: "/", handler: PageHandlers.makeHome)
 	routes.add(method: .get, uri: "/{pageid}", handler: PageHandlers.makePage)
+	routes.add(method: .get, uri: "/tag/{tag}", handler: PageHandlers.makeTagPage)
 
 	return routes
 }

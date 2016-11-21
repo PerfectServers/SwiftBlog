@@ -47,7 +47,9 @@ extension BlogAdmin {
 		let taglist = tags.split(",")
 		var tagassembled = [[String:String]]()
 		for tag in taglist {
-			tagassembled.append(["tag":tag.trimmed()])
+			if !tag.trimmed().isEmpty {
+				tagassembled.append(["tag":tag.trimmed()])
+			}
 		}
 		page.config["tags"] = tagassembled
 		do {

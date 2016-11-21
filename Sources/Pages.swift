@@ -71,6 +71,13 @@ class Page: PostgresStORM {
 			if let tags = row.config["tags"] {
 				r["tags"] = (tags as? [Any])!
 			}
+			var heroimagealt = ""
+			if let heroimagealtt = row.config["heroimagealt"] {
+				heroimagealt = heroimagealtt as! String
+			}
+			if let heroimage = row.config["heroimage"] {
+				r["heroimage?"] = ["image":heroimage, "alt":heroimagealt]
+			}
 
 			articleArray.append(r)
 		}
@@ -122,8 +129,13 @@ class Page: PostgresStORM {
 			if let script = row.config["script"] {
 				article["script"] = script as! String
 			}
+
+			var heroimagealt = ""
+			if let heroimagealtt = row.config["heroimagealt"] {
+				heroimagealt = heroimagealtt as! String
+			}
 			if let heroimage = row.config["heroimage"] {
-				article["heroimage?"] = ["content":heroimage]
+				article["heroimage?"] = ["image":heroimage, "alt":heroimagealt]
 			}
 			if let tags = row.config["tags"] {
 				article["tags"] = (tags as? [Any])!
@@ -243,6 +255,41 @@ class Page: PostgresStORM {
 		return pageArray
 	}
 	
+	func toStub() -> [[String: Any]] {
+		//assumes search already made and we have results
 
+		var articleArray = [[String: Any]]()
+
+		for row in rows() {
+			var r = [String: Any]()
+			r["name"] = row.name
+			r["url"] = row.url
+			if let datepublished = row.config["datepublished"] {
+				r["datepublished"] = datepublished as! String
+			}
+			if let subhead = row.config["subhead"] {
+				r["subhead"] = subhead as! String
+			}
+			if let intro = row.config["intro"] {
+				r["intro"] = intro as! String
+			}
+			if let tags = row.config["tags"] {
+				r["tags"] = (tags as? [Any])!
+			}
+			var heroimagealt = ""
+			if let heroimagealtt = row.config["heroimagealt"] {
+				heroimagealt = heroimagealtt as! String
+			}
+			if let heroimage = row.config["heroimage"] {
+				r["heroimage?"] = ["image":heroimage, "alt":heroimagealt]
+			}
+
+			articleArray.append(r)
+		}
+
+		return articleArray
+
+		
+	}
 
 }

@@ -1,5 +1,32 @@
 @import url(font-awesome.min.css);
+/*
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Raleway:400,800,900");
+*/
+@font-face {
+    font-family: 'robotolight';
+    src: url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_light_macroman/Roboto-Light-webfont.eot');
+    src: url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_light_macroman/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_light_macroman/Roboto-Light-webfont.woff') format('woff'),
+         url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_light_macroman/Roboto-Light-webfont.ttf') format('truetype'),
+         url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_light_macroman/Roboto-Light-webfont.svg#robotolight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'robotomedium';
+    src: url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_medium_macroman/Roboto-Medium-webfont.eot');
+    src: url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_medium_macroman/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_medium_macroman/Roboto-Medium-webfont.woff') format('woff'),
+         url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_medium_macroman/Roboto-Medium-webfont.ttf') format('truetype'),
+         url('https://s3-us-west-2.amazonaws.com/xserve-media/relatablerachel/fonts/roboto_medium_macroman/Roboto-Medium-webfont.svg#robotomedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 
 /*
 	Future Imperfect by HTML5 UP
@@ -1426,7 +1453,7 @@
 
 	body, input, select, textarea {
 		color: #646464;
-		font-family: "Source Sans Pro", Helvetica, sans-serif;
+		font-family: "robotolight", Helvetica, sans-serif;
 		font-size: 14pt;
 		font-weight: 400;
 		line-height: 1.75;
@@ -1478,7 +1505,7 @@
 		-ms-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		border-bottom: dotted 1px rgba(160, 160, 160, 0.65);
-		color: inherit;
+		color: #2ebaae !important;
 		text-decoration: none;
 	}
 
@@ -1491,11 +1518,11 @@
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #2ebaae !important;
+			color: #14524d !important;
 		}
 
 			a:hover:before {
-				color: #2ebaae !important;
+				color: #14524d !important;
 			}
 
 	strong, b {
@@ -1513,9 +1540,9 @@
 
 	h1, h2, h3, h4, h5, h6 {
 		color: #3c3b3b;
-		font-family: "Raleway", Helvetica, sans-serif;
-		font-weight: 800;
-		letter-spacing: 0.25em;
+		font-family: "robotomedium", Helvetica, sans-serif;
+		/*font-weight: 800;*/
+		letter-spacing: 0.15em;
 		line-height: 1.65;
 		margin: 0 0 1em 0;
 		text-transform: uppercase;
@@ -1563,6 +1590,7 @@
 		font-style: italic;
 		margin: 0 0 2em 0;
 		padding: 0.5em 0 0.5em 2em;
+		font-size: 1.4em;
 	}
 
 	code {
@@ -1630,7 +1658,7 @@
 		-ms-justify-content: -ms-flex-end;
 		justify-content: flex-end;
 		border-bottom: 0;
-		font-family: "Raleway", Helvetica, sans-serif;
+		font-family: "robotomedium", Helvetica, sans-serif;
 		font-size: 0.6em;
 		font-weight: 400;
 		letter-spacing: 0.25em;
@@ -1714,9 +1742,9 @@
 		color: #3c3b3b !important;
 		cursor: pointer;
 		display: inline-block;
-		font-family: "Raleway", Helvetica, sans-serif;
+		font-family: "robotomedium", Helvetica, sans-serif;
 		font-size: 0.6em;
-		font-weight: 800;
+		font-weight: normal;
 		height: 4.8125em;
 		letter-spacing: 0.25em;
 		line-height: 4.8125em;
@@ -2165,7 +2193,7 @@
 	ul {
 		list-style: disc;
 		margin: 0 0 2em 0;
-		padding-left: 1em;
+		padding-left: 3em;
 	}
 
 		ul li {
@@ -2433,7 +2461,7 @@
 
 					ul.posts article header .published {
 						display: block;
-						font-family: "Raleway", Helvetica, sans-serif;
+						font-family: "robotomedium", Helvetica, sans-serif;
 						font-size: 0.6em;
 						font-weight: 400;
 						letter-spacing: 0.25em;
@@ -2511,7 +2539,7 @@
 
 			.mini-post header .published {
 				display: block;
-				font-family: "Raleway", Helvetica, sans-serif;
+				font-family: "robotomedium", Helvetica, sans-serif;
 				font-size: 0.6em;
 				font-weight: 400;
 				letter-spacing: 0.25em;
@@ -2627,9 +2655,9 @@
 				.post > header .meta .published {
 					color: #3c3b3b;
 					display: block;
-					font-family: "Raleway", Helvetica, sans-serif;
+					font-family: "robotomedium", Helvetica, sans-serif;
 					font-size: 0.7em;
-					font-weight: 800;
+					font-weight: normal;
 					letter-spacing: 0.25em;
 					margin-top: 0.5em;
 					text-transform: uppercase;
@@ -2681,7 +2709,7 @@
 				.post > footer .stats li {
 					border-left: solid 1px rgba(160, 160, 160, 0.3);
 					display: inline-block;
-					font-family: "Raleway", Helvetica, sans-serif;
+					font-family: "robotomedium", Helvetica, sans-serif;
 					font-size: 0.6em;
 					font-weight: 400;
 					letter-spacing: 0.25em;
@@ -2867,7 +2895,7 @@
 	}
 
 	header p {
-		font-family: "Raleway", Helvetica, sans-serif;
+		font-family: "robotomedium", Helvetica, sans-serif;
 		font-size: 0.7em;
 		font-weight: 400;
 		letter-spacing: 0.25em;
@@ -3025,7 +3053,7 @@
 
 				#header .links ul li a {
 					border-bottom: 0;
-					font-family: "Raleway", Helvetica, sans-serif;
+					font-family: "robotomedium", Helvetica, sans-serif;
 					font-size: 0.7em;
 					font-weight: 400;
 					letter-spacing: 0.25em;
@@ -3332,7 +3360,7 @@
 
 	#footer .copyright {
 		color: #aaaaaa;
-		font-family: "Raleway", Helvetica, sans-serif;
+		font-family: "robotomedium", Helvetica, sans-serif;
 		font-size: 0.5em;
 		font-weight: 400;
 		letter-spacing: 0.25em;
@@ -3408,7 +3436,7 @@
 					}
 
 					#menu .links > li a p {
-						font-family: "Raleway", Helvetica, sans-serif;
+						font-family: "robotomedium", Helvetica, sans-serif;
 						font-size: 0.6em;
 						font-weight: 400;
 						letter-spacing: 0.25em;

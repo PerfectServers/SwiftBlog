@@ -1,0 +1,52 @@
+{{>../header}}
+		<link rel="stylesheet" href="/styles/admin.css" />
+
+				<!-- Main -->
+					<div id="main">
+
+<h2>{{pagename}}</h2>
+
+<form method="post" action="?">
+
+	<div class="admin-mb">
+		User Name:<br>
+		<input type="text" name="username" value="{{username}}">
+	</div>
+	
+	<div class="admin-mb">
+		Password:<br>
+		<i>(Only set if both passwords are entered and they match)</i><br>
+		<input type="password" name="password" value="">
+	</div>
+	
+	<div class="admin-mb">
+		Repeat Password:<br>
+		<input type="password" name="password2" value="">
+	</div>
+	
+	
+	
+	<div class="admin-mb">
+		First Name:<br>
+		<input type="text" name="firstname" value="{{firstname}}">
+	</div>
+	<div class="admin-mb">
+		Last Name:<br>
+		<input type="text" name="lastname" value="{{lastname}}">
+	</div>
+
+	<div class="admin-mb">
+		Email:<br>
+		<input type="text" name="email" value="{{email}}">
+	</div>
+
+	<div class="admin-mb">
+		<input type="submit" name="Save">
+		<input type="button" value="Cancel" onClick="document.location.href='/admin/users'; return false;">
+	</div>
+</form>
+
+					</div>
+{{>../sidebar}}
+{{>../footer}}
+

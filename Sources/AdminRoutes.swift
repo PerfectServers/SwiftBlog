@@ -36,7 +36,19 @@ public func makeAdminRoutes() -> Routes {
 	routes.add(method: .get, uri: "/admin/pages/{id}/toggle", handler: BlogAdmin.pagesAdminToggle)
 
 
+	// Users
+	routes.add(method: .get, uri: "/admin/users", handler: BlogAdmin.userAdmin)
+	routes.add(method: .post, uri: "/admin/users", handler: BlogAdmin.userAdmin)
 
+	routes.add(method: .get, uri: "/admin/users/new", handler: BlogAdmin.userAdminCreate)
+	routes.add(method: .post, uri: "/admin/users/new", handler: BlogAdmin.userAdminCreate)
+
+	routes.add(method: .get, uri: "/admin/users/{id}/edit", handler: BlogAdmin.userAdminEdit)
+	routes.add(method: .post, uri: "/admin/users/{id}/edit", handler: BlogAdmin.userAdminEdit)
+
+	routes.add(method: .get, uri: "/admin/users/{id}/delete", handler: BlogAdmin.userAdminDelete)
+	routes.add(method: .post, uri: "/admin/users/{id}/delete", handler: BlogAdmin.userAdminDelete)
+	
 
 	return routes
 }
