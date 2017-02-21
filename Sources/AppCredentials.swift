@@ -24,22 +24,21 @@ func makeCreds() {
 	if let config = JSONConfig(name: "\(fileRoot)ApplicationConfiguration.json") {
 		let dict = config.getValues()!
 		httpPort = dict["httpport"] as! Int
-		connect = PostgresConnect(
-			host:		dict["postgreshost"] as! String,
-			username:	dict["postgresuser"] as! String,
-			password:	dict["postgrespwd"] as! String,
-			database:	dict["postgresdbname"] as! String,
-			port:		dict["postgresport"] as! Int
-		)
+
+		PostgresConnector.host			= dict["postgreshost"] as! String
+		PostgresConnector.username		= dict["postgresuser"] as! String
+		PostgresConnector.password		= dict["postgrespwd"] as! String
+		PostgresConnector.database		= dict["postgresdbname"] as! String
+		PostgresConnector.port			= dict["postgresport"] as! Int
+
 	} else {
 		print("Unable to get Configuration")
-		connect = PostgresConnect(
-			host: "localhost",
-			username: "perfect",
-			password: "perfect",
-			database: "perfect_testing",
-			port: 5432
-		)
+
+		PostgresConnector.host			= "localhost"
+		PostgresConnector.username		= "perfect"
+		PostgresConnector.password		= "perfect"
+		PostgresConnector.database		= "perfect_testing"
+		PostgresConnector.port			= 5432
 
 	}
 

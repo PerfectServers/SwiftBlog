@@ -14,7 +14,7 @@ class BlogAdmin {
 
 	static func componentList(_ pageid: Int) -> [[String: Any]] {
 		var componentArray = [[String: Any]]()
-		let components = Component(connect!)
+		let components = Component()
 		do {
 			// gets all generic compoennts (pageid 0)
 			try components.select(columns: [], whereclause: "pageid = $1", params: [pageid], orderby: [])
@@ -36,7 +36,7 @@ class BlogAdmin {
 	}
 
 	static func makeLogin(request: HTTPRequest, _ response: HTTPResponse) {
-		let page = Page(connect!)
+		let page = Page()
 		// set the cursor (number of results to return, and offset from start)
 		let pageCursor = StORMCursor(limit: 1, offset: 0)
 
@@ -48,7 +48,7 @@ class BlogAdmin {
 
 		let componentArray = BlogAdmin.componentList(0)
 
-		let articles = Page(connect!)
+		let articles = Page()
 		let articleArray = articles.getArticles()
 
 		let context: [String : Any] = [
@@ -68,7 +68,7 @@ class BlogAdmin {
 
 		// save component...
 		if request.method == .post {
-			let thisSite = Site(connect!)
+			let thisSite = Site()
 			thisSite.id = site.id
 			thisSite.url = request.param(name: "url", defaultValue: "Not Set")!
 			//{"menu": [{"link": "/one", "name": "One"}, {"link": "/two", "name": "Two"}, {"link": "/dragons", "name": "Three"}], "title": "Relatable Rachel"}
@@ -93,7 +93,7 @@ class BlogAdmin {
 			try? thisSite.save()
 
 			// also need to save subhead component
-			let sub = Component(connect!)
+			let sub = Component()
 			var opts = [(String,Any)]()
 				opts.append(("spot","subhead"))
 				opts.append(("pageid",0))
@@ -102,7 +102,7 @@ class BlogAdmin {
 			try? sub.save()
 
 			// also need to save about
-			let about = Component(connect!)
+			let about = Component()
 			var optsAbout = [(String,Any)]()
 			optsAbout.append(("spot","about"))
 			optsAbout.append(("pageid",0))
@@ -117,7 +117,7 @@ class BlogAdmin {
 
 		let componentArray = BlogAdmin.componentList(0)
 
-		let articles = Page(connect!)
+		let articles = Page()
 		let articleArray = articles.getArticles()
 
 		var menu = [[String:String]]()
@@ -151,7 +151,7 @@ class BlogAdmin {
 			for obj in ["twitter", "facebook", "instagram", "email", "googleanalytics", "gtmcode", "disqus"] {
 
 				// also need to save subhead component
-				let sub = Component(connect!)
+				let sub = Component()
 				sub.spot = obj
 				var opts = [(String,Any)]()
 				opts.append(("spot",obj))
@@ -168,7 +168,7 @@ class BlogAdmin {
 
 		let componentArray = BlogAdmin.componentList(0)
 
-		let articles = Page(connect!)
+		let articles = Page()
 		let articleArray = articles.getArticles()
 
 

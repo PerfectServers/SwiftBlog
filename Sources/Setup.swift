@@ -9,22 +9,22 @@
 import PerfectTurnstilePostgreSQL
 import PostgresStORM
 
-let site = Site(connect!)
+let site = Site()
 func setupSystem() {
 	// Set up the Authentication table
-	let auth = AuthAccount(connect!)
-	auth.setup()
+	let auth = AuthAccount()
+	try? auth.setup()
 
 	// Connect the AccessTokenStore
-	tokenStore = AccessTokenStore(connect!)
-	tokenStore?.setup()
+	tokenStore = AccessTokenStore()
+	try? tokenStore?.setup()
 
 	// Page table
-	let page = Page(connect!)
+	let page = Page()
 	try? page.setupTable()
 
 	// Component table
-	let component = Component(connect!)
+	let component = Component()
 	try? component.setupTable()
 
 	// Site table... also sets up site vars

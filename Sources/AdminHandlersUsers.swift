@@ -64,11 +64,11 @@ extension BlogAdmin {
 
 	static func userAdmin(request: HTTPRequest, _ response: HTTPResponse) {
 
-		let users = AuthAccount(connect!)
+		let users = AuthAccount()
 		try? users.select(whereclause: "", params: [], orderby: ["username"])
 		var userArray = [[String: Any]]()
 
-		let articles = Page(connect!)
+		let articles = Page()
 		for row in users.rows() {
 			var r = [String: Any]()
 			r["uniqueID"] = row.uniqueID
@@ -98,10 +98,10 @@ extension BlogAdmin {
 
 
 	static func userAdminCreate(request: HTTPRequest, _ response: HTTPResponse) {
-		let articles = Page(connect!)
+		let articles = Page()
 
 		// save component...
-		var user = AuthAccount(connect!)
+		var user = AuthAccount()
 		if request.method == .post {
 			user.uniqueID = ""
 			user = BlogAdmin.saveUserData(request, response, user: user)
@@ -131,9 +131,9 @@ extension BlogAdmin {
 
 	static func userAdminEdit(request: HTTPRequest, _ response: HTTPResponse) {
 
-		let articles = Page(connect!)
+		let articles = Page()
 
-		var user = AuthAccount(connect!)
+		var user = AuthAccount()
 		let id = request.urlVariables["id"] ?? ""
 		do {
 			try user.get(id)
@@ -168,7 +168,7 @@ extension BlogAdmin {
 
 	static func userAdminDelete(request: HTTPRequest, _ response: HTTPResponse) {
 
-		let user = AuthAccount(connect!)
+		let user = AuthAccount()
 		let id = request.urlVariables["id"] ?? ""
 		do {
 			try user.delete(id)

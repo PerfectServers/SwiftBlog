@@ -27,6 +27,7 @@ import StORM
 import PostgresStORM
 import PerfectTurnstilePostgreSQL
 import PerfectRequestLogger
+import TurnstilePerfect
 
 //StORMdebug = true
 
@@ -55,9 +56,6 @@ let apiRoute = "/api/v1/"
 // set up creds
 makeCreds()
 setupSystem()
-
-LogFile.info("connect?.credentials.host now: \(connect?.credentials.host)")
-
 
 // Create HTTP server.
 let server = HTTPServer()

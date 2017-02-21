@@ -142,7 +142,7 @@ class Page: PostgresStORM {
 			}
 
 			// get components
-			let components = Component(connect!)
+			let components = Component()
 			try? components.select(whereclause: "pageid = $1", params: [row.id], orderby: [])
 			var cRowData = [[String: Any]]()
 			for cRow in components.rows() {
@@ -196,7 +196,7 @@ class Page: PostgresStORM {
 
 				// get components
 				var gotBody = false
-				let components = Component(connect!)
+				let components = Component()
 				try? components.select(whereclause: "pageid = $1", params: [row.id], orderby: [])
 				var cRowData = [[String: Any]]()
 				for cRow in components.rows() {

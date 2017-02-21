@@ -16,8 +16,8 @@ class PageHandlers {
 
 	static func makeHome(request: HTTPRequest, _ response: HTTPResponse) {
 		// set up container object for results
-		let page = Page(connect!)
-		let components = Component(connect!)
+		let page = Page()
+		let components = Component()
 		// set the cursor (number of results to return, and offset from start)
 		let pageCursor = StORMCursor(limit: 1, offset: 0)
 
@@ -47,10 +47,10 @@ class PageHandlers {
 			print(error)
 		}
 
-		let articles = Page(connect!)
+		let articles = Page()
 		let articleArray = articles.getArticles()
 
-		let homeArticle = Page(connect!)
+		let homeArticle = Page()
 		let thisArticle = homeArticle.getPage(link: "", isArticle: true)
 
 		let contextAccountID = request.user.authDetails?.account.uniqueID ?? ""
@@ -87,8 +87,8 @@ class PageHandlers {
 	static func makePage(request: HTTPRequest, _ response: HTTPResponse) {
 
 		// set up container object for results
-		let page = Page(connect!)
-		let components = Component(connect!)
+		let page = Page()
+		let components = Component()
 		// set the cursor (number of results to return, and offset from start)
 		let pageCursor = StORMCursor(limit: 1, offset: 0)
 
@@ -125,7 +125,7 @@ class PageHandlers {
 			r["body?"] = ["content":"Page not found"]
 			componentArray.append(r)
 		}
-		let articles = Page(connect!)
+		let articles = Page()
 		let articleArray = articles.getArticles()
 
 
@@ -156,8 +156,8 @@ class PageHandlers {
 	static func makeTagPage(request: HTTPRequest, _ response: HTTPResponse) {
 
 		// set up container object for results
-		let page = Page(connect!)
-		let components = Component(connect!)
+		let page = Page()
+		let components = Component()
 		// set the cursor (number of results to return, and offset from start)
 		let pageCursor = StORMCursor(limit: 100, offset: 0)
 
@@ -186,7 +186,7 @@ class PageHandlers {
 		} catch {
 			print(error)
 		}
-		let articles = Page(connect!)
+		let articles = Page()
 		let articleArray = articles.getArticles()
 
 

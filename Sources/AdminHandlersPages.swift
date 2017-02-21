@@ -57,7 +57,7 @@ extension BlogAdmin {
 
 		let orders = request.params(named: "sort")
 
-		let aPage = Page(connect!)
+		let aPage = Page()
 		var orderN = 1
 		for p in orders {
 			_ = try? aPage.sql("UPDATE page SET displayorder = $1 WHERE id = $2", params: [String(orderN),p])
@@ -77,8 +77,8 @@ extension BlogAdmin {
 
 	static func pagesAdmin(request: HTTPRequest, _ response: HTTPResponse) {
 
-		let articles = Page(connect!)
-		let pages = Page(connect!)
+		let articles = Page()
+		let pages = Page()
 
 		let context: [String : Any] = [
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
@@ -98,11 +98,11 @@ extension BlogAdmin {
 
 	static func pagesAdminCreate(request: HTTPRequest, _ response: HTTPResponse) {
 
-		let articles = Page(connect!)
+		let articles = Page()
 
 		// save component.
 		if request.method == .post {
-			let page = Page(connect!)
+			let page = Page()
 			BlogAdmin.savePageData(request, response, page: page)
 		}
 		// end save compoennt
@@ -124,9 +124,9 @@ extension BlogAdmin {
 	
 	static func pagesAdminEdit(request: HTTPRequest, _ response: HTTPResponse) {
 
-		let articles = Page(connect!)
+		let articles = Page()
 
-		let page = Page(connect!)
+		let page = Page()
 		let id = request.urlVariables["id"] ?? ""
 		do {
 			try page.get(id)
@@ -171,7 +171,7 @@ extension BlogAdmin {
 	
 	static func pagesAdminDelete(request: HTTPRequest, _ response: HTTPResponse) {
 
-		let page = Page(connect!)
+		let page = Page()
 		let id = request.urlVariables["id"] ?? ""
 		do {
 			try page.delete(id)
@@ -185,7 +185,7 @@ extension BlogAdmin {
 	
 	static func pagesAdminToggle(request: HTTPRequest, _ response: HTTPResponse) {
 
-		let page = Page(connect!)
+		let page = Page()
 		let id = request.urlVariables["id"] ?? ""
 		do {
 			try page.get(id)
@@ -221,12 +221,12 @@ extension BlogAdmin {
 		}
 
 
-		let page = Page(connect!)
+		let page = Page()
 		let id = request.urlVariables["id"] ?? ""
 		do {
 			try page.get(id)
 
-			let sub = Component(connect!)
+			let sub = Component()
 			sub.pageid = page.id
 			sub.spot = "body"
 			var opts = [(String,Any)]()

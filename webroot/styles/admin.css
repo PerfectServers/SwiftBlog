@@ -6,3 +6,6 @@
 .admin-mb {
 	margin-bottom: 20px;
 }
+#editor1 {
+	min-height: 100px;
+}
