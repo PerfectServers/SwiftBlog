@@ -1,6 +1,6 @@
 //
 //  AppCredentials.swift
-//  PerfectAuthTemplate-PostgreSQL
+//  SwiftBlog
 //
 //  Created by Jonathan Guthrie on 2016-11-12.
 //
@@ -21,7 +21,7 @@ struct AppCredentials {
 }
 
 func makeCreds() {
-	if let config = JSONConfig(name: "\(fileRoot)ApplicationConfiguration.json") {
+	if let config = JSONConfig(name: "\(fileRoot)config/ApplicationConfiguration.json") {
 		let dict = config.getValues()!
 		httpPort = dict["httpport"] as! Int
 

@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  PerfectAuthTemplate
+//  SwiftBlog
 //	PostgreSQL version
 //
 //  Created by Jonathan Guthrie on 2016-11-12.
