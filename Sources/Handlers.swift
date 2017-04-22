@@ -57,7 +57,7 @@ class PageHandlers {
 
 		let contextAuthenticated = request.user.authenticated
 
-		let contextTitle = "\(site.config["title"]!)"
+		let contextTitle = "\(site.config["title"] ?? "No Title Defined")"
 
 		var contextMenu = [Any]()
 		if let contextMenuis = site.config["menu"] {
@@ -123,6 +123,8 @@ class PageHandlers {
 		if page.id == 0 {
 			var r = [String: Any]()
 			r["body?"] = ["content":"Page not found"]
+			// Set 404
+			response.status = .notFound
 			componentArray.append(r)
 		}
 		let articles = Page()
@@ -133,8 +135,8 @@ class PageHandlers {
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
 			"token": request.user.authDetails?.sessionID ?? "",
 			"authenticated": request.user.authenticated,
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
+			"title": (site.config["title"] ?? "") as! String,
+			"menu": (site.config["menu"] ?? [Any]()) as! [Any],
 			"siteurl": site.url,
 			"pagename": page.name,
 			"components": componentArray,
@@ -194,8 +196,8 @@ class PageHandlers {
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
 			"token": request.user.authDetails?.sessionID ?? "",
 			"authenticated": request.user.authenticated,
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
+			"title": (site.config["title"] ?? "") as! String,
+			"menu": (site.config["menu"] ?? [Any]()) as! [Any],
 			"siteurl": site.url,
 			"pagename": page.name,
 			"components": componentArray,
