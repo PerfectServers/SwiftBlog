@@ -54,8 +54,8 @@ class BlogAdmin {
 		let context: [String : Any] = [
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
 			"authenticated": request.user.authenticated,
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
+			"title": (site.config["title"] ?? "") as! String,
+			"menu": (site.config["menu"] ?? [Any]()) as! [Any],
 			"pagename": "Login",
 			"components": componentArray,
 			"articles": articleArray
@@ -121,18 +121,19 @@ class BlogAdmin {
 		let articleArray = articles.getArticles()
 
 		var menu = [[String:String]]()
-		for ob in site.config["menu"] as! [[String:String]] {
-			menu.append(ob)
+		if let _ = site.config["menu"] {
+			for ob in site.config["menu"] as! [[String:String]] {
+				menu.append(ob)
+			}
+			for _ in menu.count..<10 {
+				menu.append(["link":"","name":""])
+			}
 		}
-		for _ in menu.count..<10 {
-			menu.append(["link":"","name":""])
-		}
-
 		let context: [String : Any] = [
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
 			"authenticated": request.user.authenticated,
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
+			"title": (site.config["title"] ?? "") as! String,
+			"menu": (site.config["menu"] ?? [Any]()) as! [Any],
 			"menudata": menu,
 			"url": site.url,
 			"pagename": "Site Admin",
@@ -175,8 +176,8 @@ class BlogAdmin {
 		let context: [String : Any] = [
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
 			"authenticated": request.user.authenticated,
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
+			"title": (site.config["title"] ?? "") as! String,
+			"menu": (site.config["menu"] ?? [Any]()) as! [Any],
 			"pagename": "Site Social & Analytics",
 			"components": componentArray,
 			"articles": articleArray
