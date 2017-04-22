@@ -84,8 +84,8 @@ extension BlogAdmin {
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
 			"authenticated": request.user.authenticated,
 			"token": request.user.authDetails?.sessionID ?? "",
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
+			"title": (site.config["title"] ?? "") as! String,
+			"menu": (site.config["menu"] ?? [Any]()) as! [Any],
 			"pagename": "Pages Admin",
 			"components": BlogAdmin.componentList(0),
 			"articles": articles.getArticles(),
@@ -111,8 +111,8 @@ extension BlogAdmin {
 		let context: [String : Any] = [
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
 			"authenticated": request.user.authenticated,
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
+			"title": (site.config["title"] ?? "") as! String,
+			"menu": (site.config["menu"] ?? [Any]()) as! [Any],
 			"pagename": "New Page",
 			"components": BlogAdmin.componentList(0),
 			"articles": articles.getArticles()
@@ -144,8 +144,8 @@ extension BlogAdmin {
 		var context: [String : Any] = [
 			"accountID": request.user.authDetails?.account.uniqueID ?? "",
 			"authenticated": request.user.authenticated,
-			"title": site.config["title"] as! String,
-			"menu": site.config["menu"] as! [Any],
+			"title": (site.config["title"] ?? "") as! String,
+			"menu": (site.config["menu"] ?? [Any]()) as! [Any],
 			"pagename": "Edit Page",
 			"components": BlogAdmin.componentList(0),
 			"articles": articles.getArticles(),
